@@ -1,12 +1,14 @@
 <script setup lang="ts">
 // import FormBinding from './components/FormBinding.vue'
-import TodoList from './components/TodoList.vue'
+// import TodoList from './components/TodoList.vue'
+import VModelPractice from './components/v-model-practice/VModelPractice.vue'
 </script>
 
 <template>
     <div class="container">
         <!-- <FormBinding /> -->
-        <TodoList />
+        <!-- <TodoList /> -->
+        <VModelPractice />
     </div>
 </template>
 
