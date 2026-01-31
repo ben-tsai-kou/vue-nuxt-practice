@@ -20,6 +20,19 @@ const users = ref([
         - Status: 如果 user.active 是 true 顯示綠色的 "Active"，否則顯示灰色的 "Inactive"
         - Actions: 顯示 "Edit" 和 "Delete" 按鈕
       -->
+            <template #row="{ name, email, active }">
+                <td>{{ name }}</td>
+                <td>{{ email }}</td>
+                <td :class="{ active: active, inactive: !active }">
+                    {{ active ? 'Active' : 'Inactive' }}
+                </td>
+                <td>
+                    <div class="btn-section">
+                        <button>Edit</button>
+                        <button>Delete</button>
+                    </div>
+                </td>
+            </template>
         </DataTable>
     </div>
 </template>
@@ -27,6 +40,20 @@ const users = ref([
 <style scoped>
 .demo {
     padding: 20px;
+    color: #000;
+}
+
+.active {
+    color: green;
+}
+
+.inactive {
+    color: gray;
+}
+
+.btn-section {
+    display: flex;
+    gap: 8px;
 }
 
 h2 {

@@ -1,7 +1,7 @@
-<script setup lang="ts">
+<script setup lang="ts" generic="T extends Record<string, unknown>">
 interface Props {
     columns: string[]
-    data: Record<string, unknown>[]
+    data: T[]
 }
 
 defineProps<Props>()
@@ -18,6 +18,10 @@ defineProps<Props>()
         </thead>
         <tbody>
             <!-- TODO: 用 v-for 渲染每一行，並將 row data, row index 傳給 scoped slot -->
+            <!-- bad idea for using index as key but it's a practice so ... -->
+            <tr v-for="(row, index) in data" :key="index">
+                <slot name="row" v-bind="{ ...row, rowIndex: index }"></slot>
+            </tr>
         </tbody>
     </table>
 </template>
@@ -26,6 +30,7 @@ defineProps<Props>()
 .data-table {
     width: 100%;
     border-collapse: collapse;
+    color: #000;
 }
 
 .data-table th {
