@@ -29,3 +29,4 @@ When helping me:
 - TypeScript strict mode
 - `<script setup lang="ts">` syntax
 - Follow Vue style guide recommendations
+- when generate exercise code, it would always be script first, then template, and style would be the last
