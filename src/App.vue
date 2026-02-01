@@ -5,13 +5,12 @@ import Exercise2 from './components/exercises/exercise2/App.vue'
 import Exercise3 from './components/exercises/exercise3/App.vue'
 import Exercise4 from './components/exercises/exercise4/App.vue'
 
-const currentExercise = ref(1)
+const currentExercise = ref(4)
 </script>
 
 <template>
     <div class="app">
         <div class="exercise-selector">
-            asdfasdf
             <h1>Vue Slots 練習</h1>
             <div class="buttons">
                 <button

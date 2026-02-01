@@ -14,9 +14,7 @@ interface Props {
     loading?: boolean
 }
 
-const props = withDefaults(defineProps<Props>(), {
-    loading: false,
-})
+const { loading, users } = defineProps<Props>()
 
 const searchQuery = ref('')
 const roleFilter = ref('')
@@ -24,8 +22,12 @@ const roleFilter = ref('')
 // TODO: 實作 filteredUsers computed property
 // 根據 searchQuery (name) 和 roleFilter 過濾 users
 const filteredUsers = computed(() => {
-    // 你的實作
-    return []
+    return users.filter((user) => {
+        const matchesSearch =
+            !searchQuery.value || user.name.toLowerCase().includes(searchQuery.value.toLowerCase())
+        const matchesRole = !roleFilter.value || user.role === roleFilter.value
+        return matchesSearch && matchesRole
+    })
 })
 </script>
 
@@ -52,6 +54,20 @@ const filteredUsers = computed(() => {
         2. 有過濾結果：使用 v-for 渲染，每個 user 用 scoped slot 傳出去
         3. 沒有結果：使用 empty slot
       -->
+
+            <!-- 1 -->
+            <slot v-if="loading" name="loading">
+                <p>Loading...</p>
+            </slot>
+            <!-- 2 -->
+            <template v-else-if="filteredUsers.length > 0">
+                <ul>
+                    <li v-for="user in filteredUsers" :key="user.id">
+                        <slot name="user" v-bind="user"></slot>
+                    </li>
+                </ul>
+            </template>
+            <slot v-else> no user found. </slot>
         </div>
     </div>
 </template>
